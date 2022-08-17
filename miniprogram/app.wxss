@@ -1,0 +1,42 @@
+/**app.wxss**/
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+} 
+
+button {
+  background: initial;
+}
+
+button:focus{
+  outline: 0;
+}
+
+button::after{
+  border: none;
+}
+
+@font-face {
+  font-family: 'my-icon';
+  src: url('./my-icon.ttf') format('truetype');
+}
+
+.my-icon {
+  font-family: 'my-icon';
+}
+
+.my-icon-extra::before {
+  content: '\e626';
+}
+
+page {
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

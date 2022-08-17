@@ -1,0 +1,64 @@
+
+<!-- 主页主体部分 -->
+<view class="custom-bar" style="height:{{navHeight}}px;z-index: 2;">
+  <view class="custom-bar__wrapper" style="margin-top:{{searchMarginTop}}px; height: {{searchHeight}}px;width: {{searchWidth}}px" >
+    <navigator url="/pages/Search/Search" class="search-group">
+      <view class="search-group__input">
+        <van-icon name="search" color="#808080"/>
+        搜索好吃的</view>
+    </navigator>
+  </view>
+</view>
+
+<view class="root">
+    <view class="custom-bar__wrapper" style="margin-top:{{searchMarginTop}}px; height: {{searchHeight}}px" >
+    </view>
+    <!-- 随机选择欢迎语 --> 
+    <view class="maxTitle">{{userName}}{{sentences}}</view>
+</view>
+
+<!-- filters -->
+<scroll-view scroll-x="true" style="white-space: nowrap; margin-top:3px">
+  <view  class="filterCard {{chosenPayment=='mealSwipes' ? 'chosenFilter' : ''}}" bindtap="filterPayment" data-payment="mealSwipes">Meal Swipes</view>
+  <view  class="filterCard {{chosenPayment=='oldGoldMeal' ? 'chosenFilter' : ''}}" bindtap="filterPayment" data-payment="oldGoldMeal">Old Gold Meal</view>
+  <view  class="filterCard {{chosenPayment=='foodDollar' ? 'chosenFilter' : ''}}" bindtap="filterPayment" data-payment="foodDollar" >Food Dollar</view>
+  <view  class="filterCard {{chosenPayment=='cash' ? 'chosenFilter' : ''}}" bindtap="filterPayment" data-payment="cash">Cash/Credit Card</view>
+</scroll-view>
+
+<!-- for loop -->
+<!-- 正在营业-->
+<view class="title">营业中</view>
+<block wx:for="{{eateries}}">
+<navigator wx:if="{{item.status&&item.showStatus}}" class="resturantCard" url="{{item.page}}">
+  <view class="bigTag">
+<image wx:if="{{item.payment.mealSwipes}}" class="smallTag" src="/images/icon2.svg"></image>
+<image wx:if="{{item.payment.oldGoldMeal}}" class="smallTag" src="/images/icon5.svg"></image>
+<image wx:if="{{item.payment.foodDollar}}" class="smallTag" src="/images/icon1.svg"></image>
+<image wx:if="{{item.payment.cash}}" class="smallTag" src="/images/icon4.svg"></image>
+</view>
+<image class="resturantImage" mode="aspectFill" src="{{item.url}}"></image>
+<view class="cardResturantNameFont">{{item.name}}</view>
+<view class="flex">
+<view class="locationFont">{{item.address}}</view>
+<view class="timeFont">营业至{{item.endTime}}</view>
+</view>
+</navigator>
+</block>
+
+<view class="title">已打烊</view>
+<block wx:for="{{eateries}}">
+<navigator wx:if="{{!item.status&&item.showStatus}}" class="closeRestuarantFont" url="{{item.page}}">
+  <view class="bigTag">
+<image wx:if="{{item.payment.mealSwipes}}" class="smallTag" src="/images/icon2.svg"></image>
+<image wx:if="{{item.payment.oldGoldMeal}}" class="smallTag" src="/images/icon5.svg"></image>
+<image wx:if="{{item.payment.foodDollar}}" class="smallTag" src="/images/icon1.svg"></image>
+<image wx:if="{{item.payment.cash}}" class="smallTag" src="/images/icon4.svg"></image>
+</view>
+<image class="closeResturantImage" mode="aspectFill" src="{{item.url}}"></image>
+<view class="cardResturantNameFont">{{item.name}}</view>
+<view class="flex">
+<view class="locationFont">{{item.address}}</view>
+<view class="timeFont">{{item.tomorrowStartTime}}</view>
+</view>
+</navigator>
+</block>

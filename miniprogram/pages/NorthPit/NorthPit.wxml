@@ -1,0 +1,121 @@
+<navigation title='' show_bol='{{false}}'></navigation>
+
+<my-navigation-bar id="my-navigation-bar" style="position: absolute;z-index: 100;" background_color="{{navigationBackgroundColor}}"></my-navigation-bar>
+
+<view class="topCard">
+  <image mode="aspectFill" src="https://dining.wfu.edu/wp-content/uploads/2019/10/111-Philip-Gabriel-Photography-Aramark-HT-WakeForest-2.27.18-2100x900-c-default.jpg" style="height:100%; width:100%"></image>
+  <text class="head-text">North Pit</text>
+</view>
+
+<view class="flexTimetable">
+   <view class="shit3">
+    <view class="view" bindtap="{{ stopBtn ? 'showContent' : 'hideContent' }}">
+      <view class="shit">Opening Time</view>
+      <van-icon name="arrow-down" color="#d6b160"/>
+    </view>
+    <van-transition show="{{ choose }}" custom-class="block" name="fade">
+    <view wx:for="{{timeTable}}" class='companyInfo1'>
+      <view class='companyInfo-left'>
+        <text class="shit4">{{item.realTimeTable}}</text>
+      </view>
+    </view>
+    </van-transition>
+</view>
+
+  <view class="shit">North Dining Hall Second Floor</view>
+</view>
+
+<view class="popularTimes">
+  <view class="shit2">
+    <view>Popular Times</view>
+  </view>
+</view>
+
+<!-- Popular Time图表组建↓ -->
+<view class="shit2"><view>Estimated Occupancy</view></view>
+<cover-view class="container"> 
+  <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+</cover-view>
+
+<view class="shit2"><view>Real-time Occupancy </view></view>
+<van-skeleton loading="{{occupancy_chart_loading}}" row="8" />
+<cover-view class="container1" hidden="{{occupancy_chart_loading}}"> 
+  <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{ ec1 }}"></ec-canvas>
+</cover-view>
+
+
+<van-sticky id="stickyTab">
+   <!-- 供餐时间 Tab -->
+   <view class="topTab">
+      <van-tabs active="{{currentTimePeriodIndex}}" title-active-color="#d6b160" color="#d6b160" bind:change="onTabChange">
+         <van-tab wx:for="{{['Breakfast','Lunch','Dinner']}}" wx:for-item="periodName" wx:key="*this" title="{{periodName}}" bindtap='selectPeriod'></van-tab>
+      </van-tabs>
+   </view>
+</van-sticky>
+
+<!-- 菜单↓ -->
+<view class="swiper-container" id="swiper-container">
+   <swiper current="{{currentTimePeriodIndex}}" class='swiper' style="height:{{swiper_height}}px;" duration="300" bindchange="onSwiperChange">
+      <!-- 供餐时段 swiper 循环 -->
+      <swiper-item class="swiper-item" wx:for="{{['Breakfast','Lunch','Dinner']}}" wx:for-item="periodName" wx:key="*this">
+         <scroll-view class="swiper-item-scroll" enable-flex scroll-y scroll-with-animation style="height:{{swiper_height}}px;">
+            <van-empty class="empty-sign" description="没吃的" />
+            <view class="dinningHall-container">
+               <!-- 餐厅循环 -->
+               <view class="dinningHall" wx:for="{{menu_data[periodName]}}" wx:for-index="dinningHallName" wx:for-item="dinningHallMenu" wx:key="*this">
+                  <view class="kind-list__item">
+                        <!-- 餐厅窗口循环 -->
+                        <view class="window-item" wx:for="{{dinningHallMenu['window']}}" wx:for-index="window_name" wx:for-item="window_data" wx:key="*this">
+                           <view class="window_name" data-periodname="{{periodName}}" data-dinninghallname="{{dinningHallName}}" data-window_name="{{window_name}}">{{window_name}}</view>
+                           <!-- 窗口菜单循环 -->
+                           <view class="food-name-container">
+                              <block wx:for="{{window_data.food_list}}" wx:for-item="food_name" wx:key="index">
+                                 <view class="food-name">{{food_name}}</view>
+                              </block>
+                           </view>
+                        </view>
+                     <!-- </view> -->
+                  </view>
+               </view>
+            </view>
+            <!-- </view>. -->
+         </scroll-view>
+      </swiper-item>
+   </swiper>
+</view>
+
+<view style="height: 25px; width: 100%; background-color:#ececec;"></view>
+
+
+<!-- 评论功能 -->
+<view class="realPart1">
+  <view class="menuTitleComment">Comments</view>
+</view>
+
+<!-- Publish Comment -->
+<view class="last">
+<textarea bindinput="getContent" placeholder="来一起聊聊好吃的吧！点击评论可删除～" value="{{content}}"></textarea>
+
+<view wx:if="{{isAuth==true}}"> 
+  <button bindtap="remark" type="primary" class="buttttton">Publish Comment</button>
+</view>
+<view wx:else>
+  <button bindtap="getUserProfile" open-type="getUserProfile" type="primary" class="buttttton">请先用户授权</button>
+</view>
+</view>
+
+<!-- Comment List -->
+<block class="remarksList">
+  <view wx:for="{{comments}}" wx:key="index" class="remarks">
+    <!-- 若不是该用户所发的评论，则不能删除 -->
+    <view class="name" data-index-of-item="{{index}}" bindtap="getNotice" >{{item.userName}}</view>
+    <view class="content" data-index-of-item="{{index}}" bindtap="getNotice" >{{item.content}}</view>
+  </view> 
+</block>
+
+<view style="height: 25px; background-color: white;"></view>
+
+
+
+
+

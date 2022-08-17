@@ -1,0 +1,59 @@
+<!--pages/IncomingMenu/IncomingMenu.wxml-->
+<!-- <view style="height: 100px; width: 100%; background-color: #d6b160;"></view> -->
+<view class="root">
+   <view class="maxTitle">Upcoming Menus</view>
+</view>
+
+<van-sticky id="stickyTab">
+   <!-- 日期 Tab -->
+   <view class='topTab topTabSwiper'>
+      <view wx:for="{{dateList}}" wx:key="day">
+         <view class='tab  {{currentDateIndex == index ? "tabBorer" : ""}}' data-current="{{index}}" bindtap='selectDate'>
+            <text class="l1">{{item.show_day}}</text>
+            <text class="l2">{{item.day}}</text>
+         </view>
+      </view>
+   </view>
+
+   <!-- 供餐时间 Tab -->
+   <view class="topTab">
+      <van-tabs active="{{currentTimePeriodIndex}}" title-active-color="#d6b160" color="#d6b160" bind:change="onTabChange">
+         <van-tab wx:for="{{['Breakfast','Lunch','Dinner']}}" wx:for-item="periodName" wx:key="*this" title="{{periodName}}" bindtap='selectPeriod'></van-tab>
+      </van-tabs>
+   </view>
+</van-sticky>
+
+<!-- 菜单↓ -->
+<view class="swiper-container" id="swiper-container">
+   <swiper current="{{currentTimePeriodIndex}}" class='swiper' style="height:{{stickyTabTop + swiper_height}}px;" duration="300" bindchange="onSwiperChange">
+      <!-- 供餐时段 swiper 循环 -->
+      <swiper-item class="swiper-item" wx:for="{{['Breakfast','Lunch','Dinner']}}" wx:for-item="periodName" wx:key="*this">
+         <scroll-view class="swiper-item-scroll" enable-flex scroll-y scroll-with-animation style="height:{{stickyTabTop + swiper_height}}px;">
+            <van-empty class="empty-sign" description="没吃的" />
+            <view class="dinningHall-container">
+               <!-- 餐厅循环 -->
+               <view class="dinningHall" wx:for="{{menu_data[periodName]}}" wx:for-index="dinningHallName" wx:for-item="dinningHallMenu" wx:key="*this">
+                  <view class="kind-list__item">
+                     <view class="kind-list__item-hd {{dinningHallMenu['open']?'kind-list__item-hd-show':''}} dinningHallName" data-periodname="{{periodName}}" data-dinninghallname="{{dinningHallName}}" bindtap="dinningHallToggle">
+                        <view class="kind-list-text">{{dinningHallName}}</view>
+                     </view>
+                     <view class="kind-list__item-bd {{dinningHallMenu['open']?'kind-list__item-bd_show':''}}  window-contianer">
+                        <!-- 餐厅窗口循环 -->
+                        <view class="window-item" wx:for="{{dinningHallMenu['window']}}" wx:for-index="window_name" wx:for-item="window_data" wx:key="*this">
+                           <view class="window_name" data-periodname="{{periodName}}" data-dinninghallname="{{dinningHallName}}" data-window_name="{{window_name}}" bindtap="windowToggle">{{window_name}}</view>
+                           <!-- 窗口菜单循环 -->
+                           <view class="food-name-container">
+                              <block wx:for="{{window_data.food_list}}" wx:for-item="food_name" wx:key="index">
+                                 <view class="food-name">{{food_name}}</view>
+                              </block>
+                           </view>
+                        </view>
+                     </view>
+                  </view>
+               </view>
+            </view>
+            <!-- </view>. -->
+         </scroll-view>
+      </swiper-item>
+   </swiper>
+</view>

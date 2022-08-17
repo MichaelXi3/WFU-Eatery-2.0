@@ -1,0 +1,31 @@
+
+<view class="root">
+  <view class="userProfile" bindtap="getUserProfile">
+    <view style="display:inline;">
+      <image class="user" src="{{userPic}}"></image>
+    </view>
+    <view class="maxTitle" style="display:inline; white-space:nowrap;" open-type="getUserProfile" bindtap="getUserProfile">{{welcome}}, {{name}}</view> 
+  </view>
+</view>
+
+
+<view class="card">
+<navigator class="topTitle" url="/pages/FoodDollar/FoodDollar">Inquire Food Dollar</navigator>
+</view>
+
+<view class="card">
+<navigator class="topTitle" url="/pages/AddDeaconDolllar/AddDeaconDollar">Add Deacon/Food Dollar</navigator>
+</view>
+
+<view class="card">
+<navigator class="topTitle" url="/pages/ChangeMealPlan/ChangeMealPlan">Change Meal Plan</navigator>
+</view>
+
+<view class="card">
+<navigator class="topTitle" url="/pages/AboutUs/AboutUs">Contact Us</navigator>
+</view>
+
+
+<!-- <image class="image" src="/images/Deaco.png" style = "width:100px" mode = "widthFix"></image> -->
+
+<view class = "end">━━━━━  Code for Impact！ ━━━━━</view>

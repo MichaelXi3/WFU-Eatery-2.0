@@ -1,0 +1,84 @@
+<navigation title='' show_bol='{{false}}'></navigation>
+<view class="topCard">
+  <image mode="aspectFill" src="https://images.squarespace-cdn.com/content/v1/602c9aa15ca0a203f2d91a73/1623899120481-Y4L7IAJ51W6DTDPEH9NB/image-asset-2.jpg?format=1000w" style="height:100%; width:100%"></image>
+  <text class="head-text">Magnolia Room</text>
+</view>
+
+<view class="flexTimetable"> 
+  <view class="shit3">
+    <view class="view" bindtap="{{ stopBtn ? 'showContent' : 'hideContent' }}">
+      <view class="shit">Opening Time</view>
+      <van-icon name="arrow-down" color="#d6b160"/>
+    </view>
+    <van-transition show="{{ choose }}" custom-class="block" name="fade">
+    <view wx:for="{{timeTable}}" class='companyInfo1'>
+      <view class='companyInfo-left'>
+        <text class="shit4">{{item.realTimeTable}}</text>
+      </view>
+    </view>
+    </van-transition>
+</view> 
+
+
+  <view class="shit">Reynolda Hall Second Floor</view>
+</view>
+
+<view class="popularTimes">
+  <view class="shit2">
+    <view>Popular Times</view>
+  </view> 
+</view>
+
+
+<!-- Popular Time图表组建↓ -->
+<view style="background-color: white;">
+<view class="shit2">Real-time Occupancy</view>
+</view>
+
+<cover-view class="container1">
+<ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{ ec1 }}"></ec-canvas>
+</cover-view>
+
+<view class="greyPart"> </view>
+<view class="realPart"><view class="menuTitle">Menu</view></view>
+<van-tabs swipeable ellipsis="{{false}}" active="{{ active }}" bind:change="onChange" color="#d6b160" title-active-color="#d6b160">
+   <van-tab title="Entrees & Sides">
+      <foodCard title="Catered Lunch Specials" thumb="https://dining.wfu.edu/wp-content/uploads/2021/01/AAAAAAAAAA-scaled-760x678-c-default.jpg" />
+      <foodCard title="Chef-Inspired Special Creation 主厨特色菜肴" thumb="https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/chef-cooking.jpg?fit=1200%2C879&ssl=1"/>
+   </van-tab>
+</van-tabs>
+
+<view style="height: 25px; width: 100%; background-color:#ececec;"></view>
+
+<!-- 评论功能 -->
+<view class="realPart1">
+  <view class="menuTitle">Comments</view>
+</view>
+
+<!-- Publish Comment -->
+<view class="last">
+<textarea bindinput="getContent" placeholder="来一起聊聊好吃的吧！点击评论可删除～" value="{{content}}"></textarea>
+
+<view wx:if="{{isAuth==true}}"> 
+  <button bindtap="remark" type="primary" class="buttttton">Publish Comment</button>
+</view>
+<view wx:else>
+  <button bindtap="getUserProfile" open-type="getUserProfile" type="primary" class="buttttton">请先用户授权</button>
+</view>
+</view>
+
+<!-- Comment List -->
+<block class="remarksList">
+  <view wx:for="{{comments}}" wx:key="index" class="remarks">
+    <!-- 若不是该用户所发的评论，则不能删除 -->
+    <view class="name" data-index-of-item="{{index}}" bindtap="getNotice" >{{item.userName}}</view>
+    <view class="content" data-index-of-item="{{index}}" bindtap="getNotice" >{{item.content}}</view>
+  </view> 
+</block>
+
+<view style="height: 25px; background-color: white;"></view>
+
+
+
+
+

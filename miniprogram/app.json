@@ -1,0 +1,81 @@
+{
+  "useExtendedLib": {
+    "weui": true
+  },
+  "pages": [
+    "pages/launch/launch",
+    "pages/HomePage/HomePage",
+    "pages/Search/Search",
+    "pages/IncomingMenu/IncomingMenu",
+    "pages/Favorites/Favorites",
+    
+    "pages/chickFilA/chickFilA",
+    "pages/NorthPit/NorthPit",
+    "pages/Pit/Pit",
+    "pages/FoodDollar/FoodDollar",
+    "pages/AddDeaconDolllar/AddDeaconDollar",
+    "pages/ChangeMealPlan/ChangeMealPlan",
+    "pages/MagnoliaRoom/MagnoliaRoom",
+    
+    
+    "pages/LegalGroundsCafe/LegalGroundsCafe",
+    
+    
+    "pages/ForestGreens/ForestGreens",
+    "pages/Yamas/Yamas",
+    "pages/Subway/Subway",
+    "pages/P.O.D.Market/P.O.D.Market",
+    "components/navigation/navigation",
+    "pages/AboutUs/AboutUs"
+  ],
+  "subPackages": [
+    {
+      "root":"subPackage1",
+      "name":"subPackage1",
+      "pages": [
+        "pages/starbucks/starbucks",
+        "pages/Bento/Bento",
+        "pages/CaminoBakery/CaminoBakery",
+        "pages/Shorty/Shorty",
+        "pages/VillageJuice/VillageJuice",
+        "pages/EinsteinBrosBagels/EinsteinBrosBagels",
+        "pages/336Market/336Market",
+        "pages/Zicks/Zicks"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#d6b160",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "tabBar": {
+    "color": "#959394",
+    "selectedColor": "#FDC314",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/HomePage/HomePage",
+        "iconPath": "images/home-no.png",
+        "selectedIconPath": "images/home-yes.png",
+        "text": "Eateries"
+      },
+      {
+        "pagePath": "pages/IncomingMenu/IncomingMenu",
+        "iconPath": "images/me-no.png",
+        "selectedIconPath": "images/me-yes.png",
+        "text": "Upcoming Menu"
+      },
+      {
+        "pagePath": "pages/Favorites/Favorites",
+        "iconPath": "images/shit.png",
+        "selectedIconPath": "images/third-yes.png",
+        "text": "Deacon Dining"
+      }
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+<view class="root">
+<view class="maxTitle">🎩 如何修改 Meal Plan？</view></view> 
+
+<view class="card">
+<view class="Michael2">
+<van-steps
+  steps="{{ steps }}"
+  active="0"
+  direction="vertical"
+  active-color="#d6b160"
+  inactive-color="#d6b160"
+  inactive-icon = "star"
+  active-icon = "star"
+/>
+</view>
+</view>
+
+<view class="button" bindtap='copyText' data-text="{{contents}}">Get Website Link</view> 
+
+<view class="card2">
+<view class="Title">Meal Plan Options</view>
+ <view class="swiper-view">
+ <swiper indicatorDots="{true}" indicator-active-color="#FDC314" class="swiper_container" autoplay="true" circular="true" interval="10000">
+  <block wx:for="{{List}}" wx:key="id">
+   <swiper-item>
+    <view style="background-color:#d6b160; color: white;font-size: 21px;height: 40px; text-align: center;font-weight: bold;">{{item.text}}</view>
+    <image style="height: 100%; width: 100%;" src='{{item.url}}' mode='aspectFill'></image>
+   </swiper-item>
+  </block>
+ </swiper>
+</view>
+</view>
+
+

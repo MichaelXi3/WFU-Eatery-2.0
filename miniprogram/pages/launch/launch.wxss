@@ -1,0 +1,14 @@
+page{
+    background-color:  #d6b160 ;
+    height: 100%;
+    width: 100%;
+  } 
+.full{
+  padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    margin-top: 25%;
+}
